@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,6 +11,7 @@ const cookies = new Cookies();
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -28,7 +30,7 @@ const LoginPage = () => {
       cookies.set("TOKEN", result.data.token, {
         path: "/",
       });
-      window.location.href = "/trips";
+      navigate("/trips");
     } catch (error) {
       console.log(error);
       alert("Unable to login");
