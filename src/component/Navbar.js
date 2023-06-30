@@ -1,17 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const token = cookies.get("TOKEN");
   const handleLogout = () => {
     // Clear the cookies by setting an empty value and expiration date in the past
     cookies.set("TOKEN", "", { path: "/", expires: new Date(0) });
 
     // Redirect the user to the desired location after logout (e.g., the login page)
-    window.location.href = "/login";
+    navigate("/login");
   };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
